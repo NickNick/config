@@ -13,7 +13,7 @@
 	index = diff --cached
 
 [core]
-	excludesfile = ~/.gitignore
+	excludesfile = ~/config/gitignore/Global/*.gitignore
 	whitespace = space-before-tab
 
 [push]
