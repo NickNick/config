@@ -1,0 +1,13 @@
+# Very nice visualization of keys, to make them worth something
+# After a couple of times logging in, you'll actually recognize
+# the keys, far better than the hexadecimal-representation.
+VisualHostKey yes
+
+# Share connections to reduce reconnecting to the same host
+Host *
+	ControlMaster auto
+	ControlPath ~/.ssh/%r@%h:%p
+	# This setting prevents the connection from disappearing
+	# when there are no more active-connections. It's just
+	# keeps them around as long as possible.
+	ControlPersist yes

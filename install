@@ -39,6 +39,13 @@ do
 	install_file "$file" ".$file"
 done
 
+if [ ! -e $HOME/.ssh/config ]; then
+	cp ssh-config $HOME/.ssh/config
+else
+	echo "You already have an $HOME/.ssh/config, so we're not touching that."
+	echo "Consider appending ssh-config to your configuration."
+fi
+
 # Install vundle.
 if [ ! -d "vim/bundle/vundle" ]; then
 	mkdir -p "vim/bundle"
