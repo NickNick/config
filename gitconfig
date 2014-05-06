@@ -5,8 +5,8 @@
 	ui = auto
 
 [alias]
-	l     = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --date-order
-	lg    = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --date-order --all
+	l     = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --author-date-order
+	lg    = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --author-date-order --all
 	stat  = status
 	st    = status
 	ff    = merge --ff-only
@@ -18,19 +18,16 @@
 	whitespace = space-before-tab
 
 [push]
-	default = simple
-
-[include]
-	path = ~/.gitconfig.local
-
-[push]
-	default = current
+	default = upstream
 
 [merge]
 	conflictstyle = diff3
 
 [mergetool "tabbedmeld"]
-cmd = meld $LOCAL $BASE $REMOTE -o $MERGED --diff $BASE $LOCAL --diff $BASE $REMOTE
+	cmd = meld $LOCAL $BASE $REMOTE -o $MERGED --diff $BASE $LOCAL --diff $BASE $REMOTE
 
 [mergetool "fugitive"]
-cmd = vim -f -c Gdiff $MERGED
+	cmd = vim -f -c Gdiff $MERGED
+
+[include]
+	path = ~/.gitconfig.local

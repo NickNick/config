@@ -1,5 +1,6 @@
 # Include generic shellrc.
-[ -f "$HOME/.shellrc" ] && source "$HOME/.shellrc"
+source "$HOME/.shellrc"
+
 try_source /usr/share/doc/pkgfile/command-not-found.bash
 
 # If not running interactively, don't do anything
@@ -22,10 +23,16 @@ esac
 
 if [ $UID -eq 0 ]; then
 	PS1+='\[\e[31m\]'
+elif [ -n "$SUDO_USER" ] && [ "$USER" != "$SUDO_USER" ]; then
+	PS1+='\[\e[33m\]'
 else
 	PS1+='\[\e[32m\]'
 fi
-PS1+='\u@${HOSTNAME##${SUDO_USER-$USER}-}'
+PS1+='\u'
+if [ -n "$HAS_SSHD_ANCESTOR" ]; then
+	PS1+='\[\e[1m\]'
+fi
+PS1+='@${HOSTNAME##${SUDO_USER-$USER}-}'
 PS1+='\[\e[m\]:'
 PS1+='\[\e[34m\]\w'
 PS1+='\[\e[33m\]$(__git_ps1 "(%s)")'

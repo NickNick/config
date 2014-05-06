@@ -72,6 +72,7 @@ hi VisualNOS     cterm=bold,underline
 hi Visual        cterm=reverse ctermbg=Black
 hi WarningMsg    cterm=none ctermfg=DarkRed
 hi WildMenu      cterm=none ctermfg=Black ctermbg=3
+hi ColorColumn   ctermbg=235
 
 hi Comment       cterm=none ctermfg=DarkBlue
 hi Constant      cterm=none ctermfg=DarkRed
@@ -83,6 +84,11 @@ hi Special       cterm=none ctermfg=DarkMagenta
 hi Statement     cterm=none ctermfg=3
 hi Todo          cterm=none ctermfg=Black ctermbg=3
 hi Type          cterm=none ctermfg=DarkGreen
+
+hi SpellBad      cterm=none ctermbg=88
+hi SpellCap      cterm=none ctermbg=94
+hi SpellRare     cterm=none ctermbg=54
+hi SpellLocal    cterm=none ctermbg=18
 
 
 " GUI.
@@ -115,6 +121,7 @@ hi VisualNOS     gui=bold,underline
 hi Visual        gui=reverse guibg=#ffffff
 hi WarningMsg    gui=none guifg=#cc0000
 hi WildMenu      gui=none guifg=#000000 guibg=#cc9900
+hi ColorColumn   guibg=#333333
 
 hi Comment       gui=none guifg=#0066ff
 hi Constant      gui=none guifg=#cc0000

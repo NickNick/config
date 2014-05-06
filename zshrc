@@ -1,4 +1,5 @@
-[ -f "$HOME/.shellrc" ] && source "$HOME/.shellrc"
+source "$HOME/.shellrc"
+
 try_source /usr/share/doc/pkgfile/command-not-found.zsh
 try_source /etc/zsh_command_not_found
 
@@ -77,6 +78,8 @@ function chpwd {
 }
 
 function git_path {
+	setopt localoptions
+	setopt re_match_pcre
 	local p="$1"
 	local result=""
 	until [ "$p" = '.' -o "$p" = '/' ]; do
@@ -84,12 +87,13 @@ function git_path {
 		local info=""
 		if [ -e ${~p}/.git ]; then
 			info="$info$(cd -q ${~p} && __git_ps1 "(%s)")"
-		elif [ "true" = "$(cd -q ${~p} && git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
+		else
 			info="$info$(
 			cd -q ${~p}
-			git diff --no-ext-diff --quiet --exit-code . || echo -n '*'
-			git diff-index --cached --quiet HEAD -- . || echo -n '+'
-			git ls-files --others --exclude-standard --error-unmatch -- . >/dev/null 2>/dev/null && echo -n '%%'
+			st=$(git status --porcelain . 2>/dev/null)
+			if [ "$st" =~ '(?:^|\n).\w' ]; then echo -n '*'; fi
+			if [ "$st" =~ '(?:^|\n)\w' ]; then echo -n '+'; fi
+			if [ "$st" =~ '(?:^|\n)\?' ]; then echo -n '%%'; fi
 			)"
 		fi
 		if [ -n "$result" ]; then
@@ -103,15 +107,28 @@ function git_path {
 	echo -n "$result"
 }
 
+print_status="0"
+
+function preexec {
+	print_status="1"
+}
+
+function precmd {
+	local exit_code="$?"
+	[ $print_status == "1" ] && [ "$exit_code" -ne 0 ] && echo "$fg[red]✗ - status code $exit_code$reset_color"
+	print_status="0"
+}
+
 function prompt {
-	echo -n $'%(?,,\n)'
 	if [ $UID -eq 0 ]; then
 		echo -n "%{$fg[red]%}%n"
+	elif [ -n "$SUDO_USER" ] && [ "$USER" != "$SUDO_USER" ]; then
+		echo -n "%{$fg[yellow]%}%n"
 	else
 		echo -n "%{$fg[green]%}%n"
-		if [ -n "$SSH_TTY" ]; then
-			echo -n "%{$fg[red]%}"
-		fi
+	fi
+	if [ -n "$HAS_SSHD_ANCESTOR" ]; then
+		echo -n "%{$bold_color%}"
 	fi
 	echo -n "@${HOST##${SUDO_USER-$USER}-}"
 	echo -n "%{$reset_color%}:"
@@ -125,15 +142,14 @@ function prompt {
 	echo -n "%{$reset_color%} "
 }
 
-function rprompt {
-	echo -n "%(?,,%{\e[A$fg[red]%}%? ✗%{$reset_color\e[B%}"
-}
-
 function prompt2 {
 	prompt
 	echo -n "%{$fg[magenta]%}%_%{$reset_color%}> "
 }
 
 PROMPT='$(prompt)'
-RPROMPT='$(rprompt)'
 PROMPT2='$(prompt2)'
+
+if try_source "$config_dir/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"; then
+	ZSH_HIGHLIGHT_HIGHLIGHTERS+=(brackets)
+fi
