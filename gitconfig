@@ -11,6 +11,7 @@
 	st    = status
 	ff    = merge --ff-only
 	index = diff --cached
+	preb  = pull --rebase
 
 [core]
 	excludesfile = ~/config/gitignore/Global/*.gitignore
