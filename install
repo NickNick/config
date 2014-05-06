@@ -28,7 +28,7 @@ install_file() {
 }
 
 # Check for required tools.
-required_commands="git vim vimpager"
+required_commands="git vim"
 if ! check_commands $required_commands; then
 	exit 1;
 fi
