@@ -12,6 +12,8 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias rgrep='grep -RHInC3'
 
+alias aptdate="sudo $SHELL -c -- \"apt-get update && apt-get dist-upgrade -y && apt-get autoclean -y && apt-get autoremove -y\""
+
 [ -e "$HOME/.aliases.local" ] && source "$HOME/.aliases.local"
 
 # vi: ft=sh
