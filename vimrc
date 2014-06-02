@@ -37,6 +37,8 @@ syntax on
 colorscheme trusty
 
 filetype off
+" To work around https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=745233
+let g:vundle_default_git_proto='git'
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
