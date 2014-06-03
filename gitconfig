@@ -12,6 +12,7 @@
 	ff    = merge --ff-only
 	index = diff --cached
 	preb  = pull --rebase
+	prush = push --recurse-submodules=on-demand
 
 [core]
 	excludesfile = ~/config/gitignore/Global/*.gitignore
