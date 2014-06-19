@@ -14,6 +14,14 @@ alias rgrep='grep -RHInC3'
 
 alias aptdate="sudo $SHELL -c -- \"apt-get update && apt-get dist-upgrade -y && apt-get autoclean -y && apt-get autoremove -y\""
 
+
+alias clake="cmake -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -GNinja"
+alias clakerel="clake -DCMAKE_BUILD_TYPE=RelWithDebInfo"
+alias clakedeb="clake -DCMAKE_BUILD_TYPE=Debug"
+alias gnucake="cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -GNinja"
+alias gnucakerel="gnucake -DCMAKE_BUILD_TYPE=RelWithDebInfo"
+alias gnucakedeb="gnucake -DCMAKE_BUILD_TYPE=Debug"
+
 [ -e "$HOME/.aliases.local" ] && source "$HOME/.aliases.local"
 
 # vi: ft=sh
