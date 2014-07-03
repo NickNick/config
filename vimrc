@@ -34,7 +34,6 @@ map <MiddleMouse> <Nop>
 imap <MiddleMouse> <Nop>
 
 syntax on
-colorscheme trusty
 
 filetype off
 " To work around https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=745233
