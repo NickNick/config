@@ -50,6 +50,9 @@ fi
 # Enable viewing non-text files in less.
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
+# If there's a ~/bin, prepend it to the path
+[ -x $HOME/bin ] && export PATH=$HOME/bin:$PATH
+
 # Create a directory and change to it.
 function mkd {
 	if [ $# -gt 1 ]; then
