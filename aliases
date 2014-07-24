@@ -13,7 +13,7 @@ alias egrep='egrep --color=auto'
 alias rgrep='grep -RHInC3'
 
 alias aptdate="sudo $SHELL -c -- \"apt-get update && apt-get dist-upgrade -y && apt-get autoclean -y && apt-get autoremove -y\""
-
+alias cmake="cmake -Wdev"
 
 alias clake="cmake -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++"
 alias clakerel="clake -DCMAKE_BUILD_TYPE=RelWithDebInfo"
@@ -21,6 +21,15 @@ alias clakedeb="clake -DCMAKE_BUILD_TYPE=Debug"
 alias gnucake="cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++"
 alias gnucakerel="gnucake -DCMAKE_BUILD_TYPE=RelWithDebInfo"
 alias gnucakedeb="gnucake -DCMAKE_BUILD_TYPE=Debug"
+alias distcmake="CC='distcc $CC' CXX='distcc $CXX' cmake"
+alias distclake="CC=clang CXX=clang++ distcmake"
+alias distgnuke="CC=gcc CXX=g++ distcmake"
+alias distcmakedeb="CC='distcc $CC' CXX='distcc $CXX' cmake -DCMAKE_BUILD_TYPE=Debug"
+alias distclakedeb="CC=clang CXX=clang++ distcmakedeb"
+alias distgnukedeb="CC=gcc CXX=g++ distcmakedeb"
+alias distcmakerel="CC='distcc $CC' CXX='distcc $CXX' cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo"
+alias distclakerel="CC=clang CXX=clang++ distcmakerel"
+alias distgnukerel="CC=gcc CXX=g++ distcmakerel"
 
 # Work
 
