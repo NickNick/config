@@ -41,6 +41,9 @@ alias distgnakerel="CC='distcc $CC' CXX='distcc $CXX' cmakerel"
 CC=$previous_cc
 CXX=$previous_cxx
 
+# It's a su that checks the user's authorized_keys, quite useful.
+alias ssu='ssh localhost -l'
+
 # Work
 
 function run_pipeline_parallel(){
