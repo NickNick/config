@@ -24,6 +24,12 @@ set history=200
 set viminfo='100,s10,h,%
 set statusline=%<%f\ %h%w%m%r\ %{fugitive#statusline()}%=%-14.(%4l/%L,%c%V%)\ %P
 set guioptions=ac
+set magic " magic mode for regexes
+set so=7 " j/k scroll 7 lines
+" Disable backing up
+set nobackup
+set nowb
+set noswapfile
 let g:c_no_curly_error=1
 
 nmap K i<Cr><Esc>
@@ -89,6 +95,25 @@ endif
 
 filetype plugin on
 filetype indent on
+
+" Protect large files from sourcing and other overhead.
+" Files become read only
+if !exists("my_auto_commands_loaded")
+	let my_auto_commands_loaded = 1
+	" Large files are > 10M
+	" Set options:
+	" eventignore+=FileType (no syntax highlighting etc
+	" assumes FileType always on)
+	" noswapfile (save copy of file)
+	" bufhidden=unload (save memory when other file is viewed)
+	" buftype=nowritefile (is read-only)
+	" undolevels=-1 (no undo possible)
+	let g:LargeFile = 1024 * 1024 * 10
+	augroup LargeFile
+		autocmd BufReadPre * let f=expand("<afile>") | if getfsize(f) > g:LargeFile | set eventignore+=FileType | setlocal bufhidden=unload undolevels=-1 | endif
+	augroup END
+endif
+
 
 if filereadable($HOME . "/.vimrc.local")
 	source ~/.vimrc.local
