@@ -1,0 +1,32 @@
+function calc_eta () {
+	command=$1
+	sample_time=$2
+	number_of_things_total=$3
+
+	echo "Taking a sample with command: $command"
+	old=$(eval $command)
+	echo "Sample taken: $old, waiting $sample_time before taking a new sample"
+	sleep $sample_time
+	echo "Taking a sample"
+	new=$(eval $command)
+	echo "Sample taken: $new"
+	float diff;
+	((diff = new-old))
+	echo "Diff: $diff"
+	((things_per_second = diff / sample_time))
+	echo "Per second: $things_per_second"
+	if [ ! $((things_per_second <= 0)) ]; then
+		echo "Nothing was done: increase sample time to at least measure something"
+		return -1
+	fi
+	things_left=$((number_of_things_total - new))
+	echo "Things left: $things_left"
+	time_left=$((things_left / $things_per_second))
+	echo "Time left: $time_left"
+	now_stamp=$(date +%s)
+	integer eta_stamp;
+	eta_stamp=$((now_stamp + time_left))
+	date_stamp="@$eta_stamp"
+	eta=$(date --date=$date_stamp)
+	echo "eta: $eta"
+}
