@@ -13,7 +13,7 @@ alias egrep='egrep --color=auto'
 alias rgrep='grep -RHInC3'
 
 alias aptdate="sudo $SHELL -c -- \"apt-get update && apt-get dist-upgrade -y && apt-get autoclean -y && apt-get autoremove -y\""
-alias cmake="cmake -Wdev"
+alias cmake="cmake -Wdev -GNinja"
 alias cmakedeb="cmake -DCMAKE_BUILD_TYPE=Debug"
 alias cmakerel="cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo"
 
