@@ -7,7 +7,7 @@
 [alias]
 	l     = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai - %ar) %C(bold blue)<%an>%Creset' --abbrev-commit --author-date-order
 	lg    = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai - %ar) %C(bold blue)<%an>%Creset' --abbrev-commit --author-date-order --branches --remotes --tags
-	stashl= stash list --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai - %ar) %C(bold blue)<%an>%Creset' --abbrev-commit
+	lstash= stash list --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai - %ar) %C(bold blue)<%an>%Creset' --abbrev-commit
 	stat  = status
 	st    = status
 	ff    = merge --ff-only
