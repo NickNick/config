@@ -19,7 +19,6 @@
 	wiff  = diff --word-diff=color
 
 [core]
-	excludesfile = ~/config/gitignore/Global/*.gitignore
 	whitespace = space-before-tab
 
 [push]
