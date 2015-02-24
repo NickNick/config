@@ -19,28 +19,6 @@ function set_color {
 	fi
 }
 
-# Set terminal colors.
-set_color  0 000000 # black
-set_color  1 CC0000 # red
-set_color  2 009900 # green
-set_color  3 CC9900 # yellow
-set_color  4 0066FF # blue
-set_color  5 9933CC # magenta
-set_color  6 009999 # cyan
-set_color  7 CCCCCC # light grey
-set_color  8 333333 # dark grey
-set_color  9 FF3333 # bright red
-set_color 10 33FF33 # bright green
-set_color 11 FFFF33 # bright yellow
-set_color 12 3399CC # bright blue
-set_color 13 CC33FF # bright magenta
-set_color 14 00FFFF # bright cyan
-set_color 15 FFFFFF # white
-# Set colors for 256
-set_color 17 000033 # dark blue
-set_color 22 003300 # dark green
-set_color 52 330000 # dark green
-set_color 53 330033 # dark magenta
 
 # Set up dircolors.
 if [ -x /usr/bin/dircolors ]; then
