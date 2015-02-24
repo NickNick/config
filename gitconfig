@@ -16,6 +16,7 @@
 	prush = push --recurse-submodules=on-demand
 # destroy = git filter-branch -f --index-filter "git rm -r --cached --ignore-unmatch " && rm -rf .git/refs/original .git/logs/ && git prune --expire=now && git gc
 	ltags = log --tags=* --no-walk --format='%Cgreen%d%Creset: %s' HEAD
+	wiff  = diff --word-diff=color
 
 [core]
 	excludesfile = ~/config/gitignore/Global/*.gitignore
