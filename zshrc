@@ -73,7 +73,7 @@ function chpwd {
 	update_title
 	local count=$(count_files)
 	local hidden=$(count_hidden_files)
-	[ "$count" -le 50 ] && ls --group-directories-first -CF --color=always
+	[ "$count" -le 300 ] && ls --group-directories-first -CF --color=always -X
 	echo "Files: $count, hidden: $hidden"
 }
 
