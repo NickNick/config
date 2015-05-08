@@ -50,20 +50,7 @@ alias gtac=tac
 # It's a su that checks the user's authorized_keys, quite useful.
 alias ssu='ssh localhost -l'
 
-
-# Work
-
-function run_pipeline_parallel(){
-	number_of_parallel_instances=12
-	output_filenames=()
-	for i in {0..${number_of_parallel_instances}}
-	do
-		output_filename=$(tempfile -s -run-pipeline-output)
-		output_filenames+=${output_filename}
-		../bin/run-pipeline -R /home/sjors/mammo-ci/testcases/breastrunmc/resultsets /home/sjors/mammo-ci/testcases/breastrunmc/input/ > ${output_filename} 2>&1 &
-	done
-	echo "Done starting ${number_of_parallel_instances}. Writing output to ${output_filenames}"
-}
+alias distccclearstate='rm -r ~/.distcc/{lock,state}'
 
 [ -e "$HOME/.aliases.local" ] && source "$HOME/.aliases.local"
 
