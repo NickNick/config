@@ -76,7 +76,6 @@ GIT_PS1_SHOWUPSTREAM="auto verbose"
 
 export EDITOR=vim
 export PAGER=less
-export MANPAGER=vimpager
 
 # Always English everywhere
 export LC_ALL=en_US.UTF-8
