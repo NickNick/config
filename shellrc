@@ -1,4 +1,4 @@
-config_dir=$(dirname "$(readlink -f "$HOME/.shellrc")")
+config_dir=$(dirname "$(greadlink -f "$HOME/.shellrc")")
 
 # Source a file if it exists.
 function try_source {
