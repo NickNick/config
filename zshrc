@@ -79,7 +79,6 @@ function chpwd {
 
 function git_path {
 	setopt localoptions
-	setopt re_match_pcre
 	local p="$1"
 	local result=""
 	until [ "$p" = '.' -o "$p" = '/' ]; do
@@ -91,9 +90,9 @@ function git_path {
 			info="$info$(
 			cd -q ${~p}
 			st=$(git status --porcelain . 2>/dev/null)
-			if [ "$st" =~ '(?:^|\n).\w' ]; then echo -n '*'; fi
-			if [ "$st" =~ '(?:^|\n)\w' ]; then echo -n '+'; fi
-			if [ "$st" =~ '(?:^|\n)\?' ]; then echo -n '%%'; fi
+			if [ "$st" =~ '^. ' ]; then echo -n '*'; fi
+			if [ "$st" =~ '^ .' ]; then echo -n '+'; fi
+			if [ "$st" =~ '\?\?' ]; then echo -n '\%'; fi
 			)"
 		fi
 		if [ -n "$result" ]; then
