@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+pcregrep '(Building|Linking)' | awk '{
+	if(NR != 0){
+			printf("%f %s\n", ($4 - prev_time), prev_description);
+	}
+	prev_description="";
+	for(i=6; i <= NF; i++){
+		prev_description=prev_description" "$i;
+	}
+	prev_time = $4;
+}'
