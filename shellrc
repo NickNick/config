@@ -81,7 +81,7 @@ export MANPAGER=vimpager
 # Always English everywhere
 export LC_ALL=en_US.UTF-8
 
-export NINJA_STATUS='[%u/%r/%f rate: %o crate: %c time:%e]'
+export NINJA_STATUS='%u %r %f %e -- '
 
 try_source "$HOME/.shellrc.local"
 
