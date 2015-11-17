@@ -86,6 +86,10 @@ alias mxekedeb="cmakedeb -DCMAKE_TOOLCHAIN_FILE=\"$MXE_ROOT/usr/x86_64-w64-mingw
 alias mxekerel="cmakerel -DCMAKE_TOOLCHAIN_FILE=\"$MXE_ROOT/usr/x86_64-w64-mingw32.shared/share/cmake/mxe-conf.cmake\""
 alias mxekerela="cmakerela -DCMAKE_TOOLCHAIN_FILE=\"$MXE_ROOT/usr/x86_64-w64-mingw32.shared/share/cmake/mxe-conf.cmake\""
 
+emscripten_toolchain='/usr/local/Cellar/emscripten/1.32.0/libexec/cmake/Modules/Platform/Emscripten.cmake'
+alias emcmakedeb="cmakedeb -DCMAKE_TOOLCHAIN_FILE=${emscripten_toolchain}"
+alias emcmakerel="cmakerel -DCMAKE_TOOLCHAIN_FILE=${emscripten_toolchain}"
+
 alias gtac=tac
 
 # It's a su that checks the user's authorized_keys, quite useful.
