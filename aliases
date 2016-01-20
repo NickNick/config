@@ -14,9 +14,25 @@ alias rgrep='grep -RHInC3'
 
 alias aptdate="sudo $SHELL -c -- \"apt-get update && apt-get dist-upgrade -y && apt-get autoclean -y && apt-get autoremove -y\""
 alias cmake="cmake -Wdev -GNinja -DCMAKE_INSTALL_PREFIX=${HOME}/system-local/ -DCMAKE_PREFIX_PATH=${HOME}/system-local"
-alias cmakedeb="cmake -DCMAKE_BUILD_TYPE=Debug"
-alias cmakerel="cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo"
-alias cmakerela="cmake -DCMAKE_BUILD_TYPE=RelWithAsserts"
+
+function cmakedeb(){
+	cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS_DEBUG="-O0 -g" $@
+}
+
+function cmakerel(){
+	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_FLAGS_RELWITHDEBINFO="-O3 -g -fno-omit-frame-pointer" $@
+}
+
+function cmakerela(){
+	cmake -DCMAKE_BUILD_TYPE=RelWithAsserts -DCMAKE_CXX_FLAGS_RELWITHDEBINFO="-O3 -g -fno-omit-frame-pointer" $@
+}
+
+function cminstal(){
+	mkdir -p build-installed &&
+	cd build-installed &&
+	cmakerel .. $@ &&
+	ninja install
+}
 
 previous_cc=$CC
 previous_cxx=$CXX
@@ -31,6 +47,16 @@ alias distclake="CC='distcc $CC' CXX='distcc $CXX' cmake"
 alias distclakedeb="CC='distcc $CC' CXX='distcc $CXX' cmakedeb"
 alias distclakerel="CC='distcc $CC' CXX='distcc $CXX' cmakerel"
 alias distclakerela="CC='distcc $CC' CXX='distcc $CXX' cmakerela"
+function makeclakedeb(){
+	mkd build-clang-Debug &&
+	clakedeb .. &&
+	cd ..
+}
+function makeclakerel(){
+	mkd build-clang-Release &&
+	clakerel .. &&
+	cd ..
+}
 
 CC=gcc
 CXX=g++
@@ -42,6 +68,16 @@ alias distgnake="CC='distcc $CC' CXX='distcc $CXX' cmake"
 alias distgnakedeb="CC='distcc $CC' CXX='distcc $CXX' cmakedeb"
 alias distgnakerel="CC='distcc $CC' CXX='distcc $CXX' cmakerel"
 alias distgnakerela="CC='distcc $CC' CXX='distcc $CXX' cmakerela"
+function makegnakedeb(){
+	mkd build-gcc-Debug &&
+	gnakedeb .. &&
+	cd ..
+}
+function makegnakerel(){
+	mkd build-gcc-Release &&
+	gnakerel .. &&
+	cd ..
+}
 
 CC=$previous_cc
 CXX=$previous_cxx
