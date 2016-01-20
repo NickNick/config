@@ -98,6 +98,16 @@ alias perfgraphcaller="perf report -g 'graph,0.5,caller'"
 alias perfgraphcallee="perf report -g 'graph,0.5,callee'"
 alias perfrec="perf record -g"
 
+alias commit='git commit'
+alias preb='git preb'
+alias c='git commit'
+alias s='git status'
+alias pr='git preb'
+alias pu='git push'
+alias a='git add -p'
+alias d='git diff'
+alias w='git wiff'
+
 [ -e "$HOME/.aliases.local" ] && source "$HOME/.aliases.local"
 
 # vi: ft=sh
