@@ -52,6 +52,10 @@ alias ssu='ssh localhost -l'
 
 alias distccclearstate='rm -r ~/.distcc/{lock,state}'
 
+alias perfgraphcaller="perf report -g 'graph,0.5,caller'"
+alias perfgraphcallee="perf report -g 'graph,0.5,callee'"
+alias perfrec="perf record -g"
+
 [ -e "$HOME/.aliases.local" ] && source "$HOME/.aliases.local"
 
 # vi: ft=sh
