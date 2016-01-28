@@ -25,6 +25,7 @@ set viminfo='100,s10,h,%
 set guioptions=ac
 set magic " magic mode for regexes
 set so=7 " j/k scroll 7 lines
+set wildmenu " nice menu when invoking command-completion
 " Disable backing up
 set nobackup
 set nowb
