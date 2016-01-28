@@ -16,6 +16,7 @@ alias aptdate="sudo $SHELL -c -- \"apt-get update && apt-get dist-upgrade -y && 
 alias cmake="cmake -Wdev -GNinja -DCMAKE_INSTALL_PREFIX=${HOME}/system-local/ -DCMAKE_PREFIX_PATH=${HOME}/system-local"
 alias cmakedeb="cmake -DCMAKE_BUILD_TYPE=Debug"
 alias cmakerel="cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo"
+alias cmakerela="cmake -DCMAKE_BUILD_TYPE=RelWithAsserts"
 
 previous_cc=$CC
 previous_cxx=$CXX
@@ -25,18 +26,22 @@ CXX=clang++
 alias clake="CC=$CC CXX=$CXX cmake"
 alias clakedeb="CC=$CC CXX=$CXX cmakedeb"
 alias clakerel="CC=$CC CXX=$CXX cmakerel"
+alias clakerela="CC=$CC CXX=$CXX cmakerela"
 alias distclake="CC='distcc $CC' CXX='distcc $CXX' cmake"
 alias distclakedeb="CC='distcc $CC' CXX='distcc $CXX' cmakedeb"
 alias distclakerel="CC='distcc $CC' CXX='distcc $CXX' cmakerel"
+alias distclakerela="CC='distcc $CC' CXX='distcc $CXX' cmakerela"
 
 CC=gcc
 CXX=g++
 alias gnake="CC=$CC CXX=$CXX cmake"
 alias gnakedeb="CC=$CC CXX=$CXX cmakedeb"
 alias gnakerel="CC=$CC CXX=$CXX cmakerel"
+alias gnakerela="CC=$CC CXX=$CXX cmakerela"
 alias distgnake="CC='distcc $CC' CXX='distcc $CXX' cmake"
 alias distgnakedeb="CC='distcc $CC' CXX='distcc $CXX' cmakedeb"
 alias distgnakerel="CC='distcc $CC' CXX='distcc $CXX' cmakerel"
+alias distgnakerela="CC='distcc $CC' CXX='distcc $CXX' cmakerela"
 
 CC=$previous_cc
 CXX=$previous_cxx
@@ -44,6 +49,7 @@ CXX=$previous_cxx
 alias mxeke="cmake -DCMAKE_TOOLCHAIN_FILE=\"$MXE_ROOT/usr/x86_64-w64-mingw32.shared/share/cmake/mxe-conf.cmake\""
 alias mxekedeb="cmakedeb -DCMAKE_TOOLCHAIN_FILE=\"$MXE_ROOT/usr/x86_64-w64-mingw32.shared/share/cmake/mxe-conf.cmake\""
 alias mxekerel="cmakerel -DCMAKE_TOOLCHAIN_FILE=\"$MXE_ROOT/usr/x86_64-w64-mingw32.shared/share/cmake/mxe-conf.cmake\""
+alias mxekerela="cmakerela -DCMAKE_TOOLCHAIN_FILE=\"$MXE_ROOT/usr/x86_64-w64-mingw32.shared/share/cmake/mxe-conf.cmake\""
 
 alias gtac=tac
 
