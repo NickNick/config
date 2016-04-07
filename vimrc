@@ -31,6 +31,8 @@ set nobackup
 set nowb
 set noswapfile
 set background=dark
+set modeline
+set modelines=5
 let g:c_no_curly_error=1
 
 syntax on
