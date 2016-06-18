@@ -25,6 +25,7 @@
 
 [core]
 	whitespace = space-before-tab
+	pager =
 
 [push]
 	default = upstream
