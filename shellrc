@@ -1,32 +1,39 @@
-config_dir=$(dirname "$(readlink -f "$HOME/.shellrc")")
+config_dir="$HOME/.config/config_dir"
 
 # Source a file if it exists.
 function try_source {
 	[ -f "$1" ] && source "$1"
 }
 
-try_source "$config_dir/git-prompt.sh"
-try_source "$HOME/.aliases"
+# Test if a command exists.
+function test_command {
+	command -v "$1" > /dev/null
+}
+
+try_source "$config_dir/aliases"
 
 # Set a color in the terminal palette.
 # \param 1 The index in the pallete.
 # \param 2 is a hexadecimal RGB color code.
 function set_color {
 	if [ "$TERM" = "linux" ]; then
-		[ $1 -lt 16 ] && printf $'\e]P%X%s' $1 $2
+		[ $1 -lt 16 ] && printf $'\e]P%X%s' "$1" "$2"
 	else
-		echo -en "\e]4;$1;#$2\a"
+		printf $'\e]4;%s;#%s\e\\' "$1" "$2"
 	fi
 }
 
 
+# Disable ctrl-q and ctrl-s.
+stty start undef stop undef
+
 # Set up dircolors.
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+if test_command dircolors; then
+    test -r "$config_dir/dircolors" && eval "$(dircolors -b "$config_dir/dircolors")" || eval "$(dircolors -b)"
 fi
 
 # Enable viewing non-text files in less.
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+test_command lesspipe && eval "$(SHELL=/bin/sh lesspipe)"
 
 # If there's a ~/bin, prepend it to the path
 [ -x $HOME/bin ] && export PATH=$HOME/bin:$PATH
@@ -45,34 +52,25 @@ function mkd {
 	fi
 }
 
-# Get the directory name of a path.
-# Behaves exactly like dirname with no options.
-function dname { dirname $@ }
+export TTY="$(tty)"
+export TTY_HOST="$(who -m | awk '$NF ~ /\(.*\)/ { if ("/dev/" $2 == ENVIRON["TTY"]) { sub(/^\(/, "", $NF); sub(/\)$/, "", $NF); print $NF; exit 0; } }')"
+export TTY_USER="$(ls -l "$TTY" | awk '{ print $3; exit 0; }')"
 
-# Usage: has_ancestor PID NAME
-# Check wether the process with PID has an ancestor with NAME.
-function has_ancestor {
-	local pid=$1
-	local target=$2
-	while [ $pid -ne 0 ]; do
-		read -r ppid name < <(ps -o ppid= -o comm= -p "$pid")
-		if [ "$name" = "$target" ]; then
-			return 0
-		fi
-		pid=$ppid
-	done
-	return 1
-}
 
-if has_ancestor $$ sshd; then
-	export HAS_SSHD_ANCESTOR=1
+if [ "$SHELLTTY" != "$TTY" ]; then
+	export SHELLTTY="$TTY"
+	export NESTEDSHELLS=0
+elif [ "$SHELLPID" != "$$" ]; then
+	export NESTEDSHELLS=$(($NESTEDSHELLS + 1))
 fi
+export SHELLPID=$$
 
-# Set up git PS1 configuration.
-GIT_PS1_SHOWDIRTYSTATE=1
+# Set up git prompt configuration.
 GIT_PS1_SHOWSTASHSTATE=1
-GIT_PS1_SHOWUNTRACKEDFILES=1
-GIT_PS1_SHOWUPSTREAM="auto verbose"
+GIT_PS1_SHOWUPSTREAM=(auto verbose)
+
+source "$config_dir/git-prompt.sh"
+source "$HOME/.config/config_dir/git-prompt-path.sh"
 
 export EDITOR=vim
 export PAGER=less

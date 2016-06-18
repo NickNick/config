@@ -9,6 +9,7 @@
 	l     = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai - %ar) %C(bold blue)<%an>%Creset' --abbrev-commit --author-date-order
 	lg    = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai - %ar) %C(bold blue)<%an>%Creset' --abbrev-commit --author-date-order --branches --remotes --tags
 	lstash= stash list --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai - %ar) %C(bold blue)<%an>%Creset' --abbrev-commit
+	slg   = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai - %ar) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --author-date-order --simplify-by-decoration
 	stat  = status
 	st    = status
 	ff    = merge --ff-only
@@ -29,6 +30,9 @@
 
 [push]
 	default = upstream
+
+[rebase]
+	autoSquash = true
 
 [merge]
 	conflictstyle = diff3

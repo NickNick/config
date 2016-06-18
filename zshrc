@@ -1,13 +1,10 @@
-source "$HOME/.shellrc"
+source "$HOME/.config/config_dir/shellrc"
 
 try_source /usr/share/doc/pkgfile/command-not-found.zsh
 try_source /etc/zsh_command_not_found
 
-GIT_PS1_SHOWUPSTREAM=(${(s/ /)GIT_PS1_SHOWUPSTREAM})
-
 zstyle ':completion:*' auto-description '<%d>'
 zstyle ':completion:*' completer _complete _ignored
-zstyle ':completion:*' expand prefix suffix
 zstyle ':completion:*' file-sort name
 zstyle ':completion:*' format '[%d]'
 zstyle ':completion:*' group-name ''
@@ -26,27 +23,30 @@ compinit
 autoload edit-command-line && zle -N edit-command-line
 bindkey '\ee' edit-command-line
 
+bindkey '^q' push-line-or-edit
+
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=100000
+SAVEHIST=100000
 
 setopt appendhistory
-setopt autocd
 setopt auto_pushd
 setopt extendedglob
 setopt notify
 setopt prompt_subst
+setopt hist_ignore_dups
 unsetopt beep
 unsetopt nomatch
 
-try_source "$config_dir/zsh-fix-keys"
+try_source "$HOME/.config/config_dir/zsh-fix-keys"
+try_source "$HOME/.config/config_dir/zsh-safe-paste"
 
 autoload colors
 colors
 
 function update_title {
 	case "$TERM" in
-		xterm*|rxvt*) print -Pn "\e]2;%n@${HOST##${SUDO_USER-$USER}-}: %~\a" ;;
+		xterm*|rxvt*) print -Pn "\e]2;%n@${HOST##${TTY_USER-$USER}-}: %~\a" ;;
 	esac
 }
 update_title
@@ -77,36 +77,6 @@ function chpwd {
 	echo "Files: $count, hidden: $hidden"
 }
 
-function git_path {
-	setopt localoptions
-	setopt re_match_pcre
-	local p="$1"
-	local result=""
-	until [ "$p" = '.' -o "$p" = '/' ]; do
-		local name="${p##*/}"
-		local info=""
-		if [ -e ${~p}/.git ]; then
-			info="$info$(cd -q ${~p} && __git_ps1 "(%s)")"
-		else
-			info="$info$(
-			cd -q ${~p}
-			st=$(git status --porcelain . 2>/dev/null)
-			if [ "$st" =~ '(?:^|\n).\w' ]; then echo -n '*'; fi
-			if [ "$st" =~ '(?:^|\n)\w' ]; then echo -n '+'; fi
-			if [ "$st" =~ '(?:^|\n)\?' ]; then echo -n '%%'; fi
-			)"
-		fi
-		if [ -n "$result" ]; then
-			result=$(printf "$2/%s" "$name" "$info" "$result")
-		else
-			result=$(printf "$2" "$name" "$info")
-		fi
-		p="$(dname "$p")"
-	done
-	[ "$p" = '/' ] && result=$(printf "$2/%s" '' '' "$result")
-	echo -n "$result"
-}
-
 print_status="0"
 
 function preexec {
@@ -115,25 +85,27 @@ function preexec {
 
 function precmd {
 	local exit_code="$?"
-	[ $print_status == "1" ] && [ "$exit_code" -ne 0 ] && echo "$fg[red]✗ - status code $exit_code$reset_color"
+	[ $print_status = "1" ] && [ "$exit_code" -ne 0 ] && echo "$fg[red]✗ - status code $exit_code$reset_color"
 	print_status="0"
 }
 
 function prompt {
+	echo -n "%{$bold_color$fg[black]%}${(l:$NESTEDSHELLS::$$:)}%{$reset_color%}"
 	if [ $UID -eq 0 ]; then
 		echo -n "%{$fg[red]%}%n"
-	elif [ -n "$SUDO_USER" ] && [ "$USER" != "$SUDO_USER" ]; then
+	elif [ "$TTY_USER" != "$USER" ]; then
 		echo -n "%{$fg[yellow]%}%n"
 	else
 		echo -n "%{$fg[green]%}%n"
 	fi
-	if [ -n "$HAS_SSHD_ANCESTOR" ]; then
+	if [ -n "$TTY_HOST" ]; then
 		echo -n "%{$bold_color%}"
 	fi
-	echo -n "@${HOST##${SUDO_USER-$USER}-}"
+	echo -n "@${HOST##${TTY_USER-$USER}-}"
 	echo -n "%{$reset_color%}:"
-	git_path "$(print -P '%~')" "%%{$fg[blue]%%}%s%%{$fg[yellow]%%}%s%%{$fg[magenta]%%}"
+	git_prompt_path
 	echo -n "%{$reset_color%}"
+	echo -n '%(1j.[%j].)'
 	if [ $UID -eq 0 ]; then
 		echo -n "%{$fg[red]%}#"
 	else
@@ -153,3 +125,6 @@ PROMPT2='$(prompt2)'
 if try_source "$config_dir/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"; then
 	ZSH_HIGHLIGHT_HIGHLIGHTERS+=(brackets)
 fi
+
+# Include a local zshrc
+try_source "$HOME/.zshrc.local"

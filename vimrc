@@ -1,4 +1,3 @@
-set autowrite
 set nocompatible
 set number
 set shiftwidth=4
@@ -19,6 +18,8 @@ set showcmd
 set hlsearch
 set nrformats=octal,hex,alpha
 set updatetime=500
+set timeoutlen=300
+set ttimeoutlen=50
 set foldmethod=marker
 set history=200
 set viminfo='100,s10,h,%
@@ -32,6 +33,12 @@ set nowb
 set noswapfile
 set background=dark
 let g:c_no_curly_error=1
+
+nnoremap K i<Cr><Esc>
+nmap <Leader>o VaBJds{
+nmap <Leader>b i{<Cr><Esc>o}<Esc>k^
+noremap <MiddleMouse> <Nop>
+inoremap <MiddleMouse> <Nop>
 
 syntax on
 filetype off
@@ -56,7 +63,6 @@ if !exists("my_auto_commands_loaded")
 		autocmd BufReadPre * let f=expand("<afile>") | if getfsize(f) > g:LargeFile | set eventignore+=FileType | setlocal bufhidden=unload undolevels=-1 | endif
 	augroup END
 endif
-
 
 if filereadable($HOME . "/.vimrc.local")
 	source ~/.vimrc.local

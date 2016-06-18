@@ -1,7 +1,6 @@
 URxvt.background:           black
 URxvt.foreground:           #aaaaaa
 URxvt.font:                 xft:monospace:pixelsize=13
-URxvt.boldFont:             xft:monospace:bold:pixelsize=13
 URxvt.urgentOnBell:         true
 URxvt.scrollBar:            false
 URxvt.scrollTtyOutput:      false
@@ -23,3 +22,5 @@ URxvt.keysym.Control-Up:      \033[1;5A
 URxvt.keysym.Control-Down:    \033[1;5B
 URxvt.keysym.Control-Left:    \033[1;5D
 URxvt.keysym.Control-Right:   \033[1;5C
+
+URxvt.resize-font.reset:      C-0
