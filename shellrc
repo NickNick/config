@@ -74,7 +74,6 @@ source "$HOME/.config/config_dir/git-prompt-path.sh"
 
 export EDITOR=vim
 export PAGER=less
-export MANPAGER=vimpager
 
 # Always English everywhere
 export LC_ALL=en_US.UTF-8

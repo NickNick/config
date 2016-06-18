@@ -50,3 +50,5 @@
 	warndetachedcommit = true
 [help]
 	autocorrect = 10
+[status]
+	submodulesummary = 1

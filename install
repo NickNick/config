@@ -64,13 +64,6 @@ else
 	echo "Consider appending ssh-config to your configuration."
 fi
 
-# Install vundle.
-if [ ! -d "vim/bundle/vundle" ]; then
-	mkdir -p "vim/bundle"
-	git clone git://github.com/gmarik/vundle.git "vim/bundle/vundle"
-fi
-vim +PluginClean +PluginUpdate +qall
-
 # Install zsh-syntax-highlighting.
 if [ ! -d "zsh-syntax-highlighting" ]; then
 	git clone git://github.com/zsh-users/zsh-syntax-highlighting
