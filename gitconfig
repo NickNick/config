@@ -18,6 +18,10 @@
 # destroy = git filter-branch -f --index-filter "git rm -r --cached --ignore-unmatch " && rm -rf .git/refs/original .git/logs/ && git prune --expire=now && git gc
 	ltags = log --tags=* --no-walk --format='%Cgreen%d%Creset: %s' HEAD
 	wiff  = diff --word-diff=color
+	subase= submodule update --remote --recursive --rebase
+	submerge= submodule update --remote --recursive --rebase
+	subdif= !git diff && git submodule foreach --recursive 'git diff'
+	substa= !git status && git submodule foreach --recursive 'git status'
 
 [core]
 	whitespace = space-before-tab
