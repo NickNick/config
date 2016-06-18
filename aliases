@@ -62,6 +62,12 @@ alias perfgraphcaller="perf report -g 'graph,0.5,caller'"
 alias perfgraphcallee="perf report -g 'graph,0.5,callee'"
 alias perfrec="perf record -g"
 
+function cmake_install() {
+	mkd build-installed &&
+	clakerela .. &&
+	ninja install
+}
+
 [ -e "$HOME/.aliases.local" ] && source "$HOME/.aliases.local"
 
 # vi: ft=sh
