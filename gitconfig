@@ -45,3 +45,5 @@
 	helper = cache
 [gui]
 	warndetachedcommit = true
+[help]
+	autocorrect = 10
