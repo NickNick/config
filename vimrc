@@ -36,6 +36,11 @@ set modeline
 set modelines=5
 let g:c_no_curly_error=1
 
+hi CursorLine   cterm=underline ctermbg=none ctermfg=none
+hi CursorColumn cterm=underline ctermbg=none ctermfg=none
+set cursorcolumn
+set cursorline
+
 nnoremap K i<Cr><Esc>
 nmap <Leader>o VaBJds{
 nmap <Leader>b i{<Cr><Esc>o}<Esc>k^
