@@ -73,6 +73,7 @@ source "$config_dir/git-prompt.sh"
 source "$HOME/.config/config_dir/git-prompt-path.sh"
 
 export EDITOR=vim
+export VISUAL=vim
 export PAGER=less
 
 # Always English everywhere
