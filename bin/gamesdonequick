@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+run livestreamer https://www.twitch.tv/gamesdonequick best
