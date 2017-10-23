@@ -108,7 +108,7 @@ alias perfrec="perf record -g"
 
 function cmake_install() {
 	mkd build-installed &&
-	clakerela .. &&
+	clakerel .. &&
 	ninja install
 }
 
