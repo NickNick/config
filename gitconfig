@@ -52,3 +52,11 @@
 	autocorrect = 10
 [status]
 	submodulesummary = 1
+
+[diff "pandoc"]
+	textconv=pandoc --to=markdown
+	prompt=false
+
+[diff "docx2txt"]
+	textconv=docx2txt.sh
+	prompt=false
