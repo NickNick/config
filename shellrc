@@ -103,7 +103,7 @@ export PAGER=less
 export LC_ALL=en_US.UTF-8
 
 export NINJA_STATUS='%u %r %f %e -- '
-export PYTHONPATH="${HOME}/system-local/python"
+export PYTHONPATH="${HOME}/.local/python"
 
 try_source "$HOME/.shellrc.local"
 
