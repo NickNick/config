@@ -122,6 +122,13 @@ alias a='git add -p'
 alias d='git diff'
 alias w='git wiff'
 
+function compilengo {
+	inotifywait -r -m -e modify $1 |
+	while read p _ file; do
+		echo "Compiling $(date)" && time clang++ $1 -isystem ~/.local/include  -std=c++14 && ./a.out
+	done
+}
+
 [ -e "$HOME/.aliases.local" ] && source "$HOME/.aliases.local"
 
 # vi: ft=sh
