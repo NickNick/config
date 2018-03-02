@@ -1,0 +1,8 @@
+#!/bin/zsh
+
+set -x
+set -o errexit
+
+swapon --show=NAME,USED
+swapoff --all
+swapon --all
