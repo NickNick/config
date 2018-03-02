@@ -48,6 +48,7 @@
 	helper = cache
 [gui]
 	warndetachedcommit = true
+	commitmsgwidth = 99
 [help]
 	autocorrect = 10
 [status]
