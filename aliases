@@ -45,7 +45,7 @@ CC=clang
 CXX=clang++
 CFLAGS='-fno-omit-frame-pointer -fcolor-diagnostics -fno-limit-debug-info -march=native'
 CXXFLAGS='-fno-omit-frame-pointer -fcolor-diagnostics -ftemplate-backtrace-limit=0 -fno-limit-debug-info -march=native'
-LDFLAGS='-fuse-ld=lld'
+LDFLAGS=''
 alias     clake="CC='$CC' CXX='$CXX' CFLAGS='$CFLAGS' CXXFLAGS='$CXXFLAGS' LDFLAGS='$LDFLAGS' cmake"
 alias  clakedeb="CC='$CC' CXX='$CXX' CFLAGS='$CFLAGS' CXXFLAGS='$CXXFLAGS' LDFLAGS='$LDFLAGS' cmakedeb"
 alias  clakerel="CC='$CC' CXX='$CXX' CFLAGS='$CFLAGS' CXXFLAGS='$CXXFLAGS' LDFLAGS='$LDFLAGS' cmakerel"
