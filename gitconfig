@@ -1,7 +1,7 @@
 [diff]
 	tool = vimdiff
 	submodule = log
-	algorithm = patience
+	algorithm = histogram
 	colorMoved = default
 
 [color]
@@ -36,6 +36,8 @@
 
 [push]
 	default = current
+	followTags = true
+	tags = true
 
 [rebase]
 	autoSquash = true
@@ -91,3 +93,21 @@
     file-decoration-style = none
 [submodule]
 	recurse = 1
+[fetch]
+	prune = true
+	pruneTags = true
+	output = compact
+	parallel = 16
+
+[grep]
+	lineNumber = true
+	patternType = extended
+	threads = 32
+
+[init]
+	defaultBranch = main
+
+[pack]
+	threads = 0
+[rerere]
+	enabled = true
