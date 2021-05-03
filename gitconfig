@@ -1,15 +1,22 @@
 [diff]
 	tool = vimdiff
 	submodule = log
+	algorithm = patience
+	colorMoved = default
 
 [color]
 	ui = auto
 
 [alias]
+# Short log
 	l     = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai - %ar) %C(bold blue)<%an>%Creset' --abbrev-commit --author-date-order
+# Short log, but for most relevant refs
 	lg    = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai - %ar) %C(bold blue)<%an>%Creset' --abbrev-commit --author-date-order --branches --remotes --tags
+# Short log for stashes
 	lstash= stash list --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai - %ar) %C(bold blue)<%an>%Creset' --abbrev-commit
+# Short simple log
 	slg   = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai - %ar) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --author-date-order --simplify-by-decoration
+        lol   = log --graph --pretty=format:'%C(auto)%h%d%Creset %C(cyan)(%cr)%Creset %C(green)%cn <%ce>%Creset %s'
 	stat  = status
 	st    = status
 	ff    = merge --ff-only
@@ -28,7 +35,7 @@
 	whitespace = space-before-tab
 
 [push]
-	default = upstream
+	default = current
 
 [rebase]
 	autoSquash = true
@@ -60,3 +67,27 @@
 [diff "docx2txt"]
 	textconv=docx2txt.sh
 	prompt=false
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[pull]
+	rebase = true
+
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    features = side-by-side line-numbers decorations
+    whitespace-error-style = 22 reverse
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
+[submodule]
+	recurse = 1
