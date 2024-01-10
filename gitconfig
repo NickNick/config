@@ -1,74 +1,33 @@
-[diff]
-	tool = vimdiff
-	submodule = log
-	algorithm = histogram
-	colorMoved = default
-
-[color]
-	ui = auto
-
-[alias]
-# Short log
-	l     = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai - %ar) %C(bold blue)<%an>%Creset' --abbrev-commit --author-date-order
-# Short log, but for most relevant refs
-	lg    = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai - %ar) %C(bold blue)<%an>%Creset' --abbrev-commit --author-date-order --branches --remotes --tags
-# Short log for stashes
-	lstash= stash list --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai - %ar) %C(bold blue)<%an>%Creset' --abbrev-commit
-# Short simple log
-	slg   = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai - %ar) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --author-date-order --simplify-by-decoration
-        lol   = log --graph --pretty=format:'%C(auto)%h%d%Creset %C(cyan)(%cr)%Creset %C(green)%cn <%ce>%Creset %s'
-	stat  = status
-	st    = status
-	ff    = merge --ff-only
-	index = diff --cached
-	preb  = pull --rebase
-	prush = push --recurse-submodules=on-demand
-# destroy = git filter-branch -f --index-filter "git rm -r --cached --ignore-unmatch " && rm -rf .git/refs/original .git/logs/ && git prune --expire=now && git gc
-	ltags = log --tags=* --no-walk --format='%Cgreen%d%Creset: %s' HEAD
-	wiff  = diff --word-diff=color
-	subase= submodule update --remote --recursive --rebase
-	submerge= submodule update --remote --recursive --rebase
-	subdif= !git diff && git submodule foreach --recursive 'git diff'
-	substa= !git status && git submodule foreach --recursive 'git status'
+[user]
+	email=nick@astrant.net
+	name="Nick Overdijk"
 
 [core]
 	whitespace = space-before-tab
-
+	pager = delta
+	fsmonitor = true
+[diff]
+	tool = difftastic
+	submodule = log
+	algorithm = histogram
+	colorMoved = default
+	external = difft
+[color]
+	ui = auto
 [push]
-	default = current
 	followTags = true
-	tags = true
-
+	autoSetupRemote = true
+	recurseSubmodules = check
 [rebase]
 	autoSquash = true
-
 [merge]
 	conflictstyle = diff3
-
-[mergetool "tabbedmeld"]
-	cmd = meld $LOCAL $BASE $REMOTE -o $MERGED --diff $BASE $LOCAL --diff $BASE $REMOTE
-
-[mergetool "fugitive"]
-	cmd = vim -f -c Gdiff $MERGED
-
-[include]
-	path = ~/.gitconfig.local
 [credential]
 	helper = cache
 [gui]
 	warndetachedcommit = true
-[help]
-	autocorrect = 10
 [status]
 	submodulesummary = 1
-
-[diff "pandoc"]
-	textconv=pandoc --to=markdown
-	prompt=false
-
-[diff "docx2txt"]
-	textconv=docx2txt.sh
-	prompt=false
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -76,38 +35,64 @@
 	required = true
 [pull]
 	rebase = true
-
-[core]
-    pager = delta
-
-[interactive]
-    diffFilter = delta --color-only
-
-[delta]
-    features = side-by-side line-numbers decorations
-    whitespace-error-style = 22 reverse
-
-[delta "decorations"]
-    commit-decoration-style = bold yellow box ul
-    file-style = bold yellow ul
-    file-decoration-style = none
+	default = current
 [submodule]
-	recurse = 1
+	recurse = true
 [fetch]
 	prune = true
 	pruneTags = true
 	output = compact
-	parallel = 16
-
+	parallel = 4
 [grep]
 	lineNumber = true
 	patternType = extended
-	threads = 32
-
+	threads = 16
 [init]
 	defaultBranch = main
-
 [pack]
 	threads = 0
 [rerere]
 	enabled = true
+
+[pager]
+	difftool = true
+
+[alias]
+# Short log
+	l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai - %ar) %C(bold blue)<%an>%Creset' --abbrev-commit --author-date-order
+# Short log, but for most relevant refs
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai - %ar) %C(bold blue)<%an>%Creset' --abbrev-commit --author-date-order --branches --remotes --tags
+# Short log for stashes
+	lstash= stash list --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai - %ar) %C(bold blue)<%an>%Creset' --abbrev-commit
+# Short simple log
+	slg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai - %ar) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --author-date-order --simplify-by-decoration
+	lol = log --graph --pretty=format:'%C(auto)%h%d%Creset %C(cyan)(%cr)%Creset %C(green)%cn <%ce>%Creset %s'
+	ff = merge --ff-only
+	index = diff --cached
+	preb = pull --rebase
+	prush = push --recurse-submodules=on-demand
+# destroy = git filter-branch -f --index-filter "git rm -r --cached --ignore-unmatch " && rm -rf .git/refs/original .git/logs/ && git prune --expire=now && git gc
+	ltags = log --tags=* --no-walk --format='%Cgreen%d%Creset: %s' HEAD
+	wiff = diff --word-diff=color
+	subase= submodule update --remote --recursive --rebase
+	submerge= submodule update --remote --recursive --rebase
+	subdif= !git diff && git submodule foreach --recursive 'git diff'
+	substa= !git status && git submodule foreach --recursive 'git status'
+	dft = difftool
+
+[include]
+	path = ~/.gitconfig.local
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true  # use n and N to move between diff sections
+
+[difftool]
+	prompt = false
+
+[difftool "difftastic"]
+	cmd = difft "$LOCAL" "$REMOTE"
+[safe]
+	directory = /mnt/data/code/brepo

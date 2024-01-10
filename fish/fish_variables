@@ -1,0 +1,7 @@
+# This file contains fish universal variable definitions.
+# VERSION: 3.0
+SETUVAR --export DFT_COLOR:always
+SETUVAR --export INSTA_TEST_RUNNER:nextest
+SETUVAR --export PARU_PAGER:bat
+SETUVAR --export RUST_BACKTRACE:1
+SETUVAR SSH_KEYS_TO_AUTOLOAD:/home/nick/\x2essh/id_rsa

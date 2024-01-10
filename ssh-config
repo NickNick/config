@@ -10,4 +10,6 @@ Host *
 	# This setting prevents the connection from disappearing
 	# when there are no more active-connections. It's just
 	# keeps them around as long as possible.
+	# On some systems, detecting that the connection is dead takes so long you
+	# might want to turn this off.
 	ControlPersist yes

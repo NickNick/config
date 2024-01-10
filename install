@@ -31,17 +31,12 @@ install_file() {
 	ln -fs "$config_dir/$1" "$HOME/$2"
 }
 
-# Check for required tools.
-required_commands="git vim"
-if ! check_commands $required_commands; then
-	exit 1
-fi
-
 # Make a symlink to the config dir at $HOME/.config/config_dir
 if [ ! -e "$HOME/.config" ]; then
 	mkdir "$HOME/.config"
 elif [ ! -d "$HOME/.config" ]; then
 	echo "$HOME/.config exists and is not a directory." 1>&2
+	exit 1
 fi;
 
 if [ ! -e "$HOME/.config/config_dir" ]; then
@@ -52,19 +47,10 @@ elif [ "$(readlink "$HOME/.config/config_dir")" != "$config_dir_prefix$config_di
 fi
 
 # Install configuration files.
-for file in bash_profile bashrc gitconfig profile screenrc vimrc zshrc vim zprofile Xresources tmux.conf
+for file in aliases bash_profile bashrc gitconfig profile shellrc ssh-config tmux.conf
 do
 	install_file "$file" ".$file"
 done
 
-if [ ! -e $HOME/.ssh/config ]; then
-	cp ssh-config $HOME/.ssh/config
-else
-	echo "You already have an $HOME/.ssh/config, so we're not touching that."
-	echo "Consider appending ssh-config to your configuration."
-fi
-
-# Install zsh-syntax-highlighting.
-if [ ! -d "zsh-syntax-highlighting" ]; then
-	git clone git://github.com/zsh-users/zsh-syntax-highlighting
-fi
+install_file "fish" "$HOME/.config/fish"
+install_file "ssh-config" "$HOME/.ssh/config"

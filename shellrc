@@ -12,28 +12,8 @@ function test_command {
 
 try_source "$config_dir/aliases"
 
-# Set a color in the terminal palette.
-# \param 1 The index in the pallete.
-# \param 2 is a hexadecimal RGB color code.
-function set_color {
-	if [ "$TERM" = "linux" ]; then
-		[ $1 -lt 16 ] && printf $'\e]P%X%s' "$1" "$2"
-	else
-		printf $'\e]4;%s;#%s\e\\' "$1" "$2"
-	fi
-}
-
-
 # Disable ctrl-q and ctrl-s.
 stty start undef stop undef
-
-# Set up dircolors.
-if test_command dircolors; then
-    test -r "$config_dir/dircolors" && eval "$(dircolors -b "$config_dir/dircolors")" || eval "$(dircolors -b)"
-fi
-
-# Enable viewing non-text files in less.
-test_command lesspipe && eval "$(SHELL=/bin/sh lesspipe)"
 
 # If there's a ~/bin, prepend it to the path
 [ -x $HOME/bin ] && export PATH=$HOME/bin:$PATH
@@ -75,36 +55,11 @@ else
      start_agent;
 fi
 
-export TTY="$(tty)"
-export TTY_HOST="$(who -m | awk '$NF ~ /\(.*\)/ { if ("/dev/" $2 == ENVIRON["TTY"]) { sub(/^\(/, "", $NF); sub(/\)$/, "", $NF); print $NF; exit 0; } }')"
-export TTY_USER="$(ls -l "$TTY" | awk '{ print $3; exit 0; }')"
-
-
-if [ "$SHELLTTY" != "$TTY" ]; then
-	export SHELLTTY="$TTY"
-	export NESTEDSHELLS=0
-elif [ "$SHELLPID" != "$$" ]; then
-	export NESTEDSHELLS=$(($NESTEDSHELLS + 1))
-fi
-export SHELLPID=$$
-
-# Set up git prompt configuration.
-GIT_PS1_SHOWSTASHSTATE=1
-GIT_PS1_SHOWUPSTREAM=(auto verbose)
-
-source "$config_dir/git-prompt.sh"
-source "$HOME/.config/config_dir/git-prompt-path.sh"
-
-export EDITOR=vim
-export VISUAL=vim
-export PAGER=less
+export EDITOR=hx
+export VISUAL=hx
+export PAGER=bat
 
 # Always English everywhere
 export LC_ALL=en_US.UTF-8
 
-export NINJA_STATUS='%u %r %f %e -- '
-export PYTHONPATH="${HOME}/.local/python"
-
 try_source "$HOME/.shellrc.local"
-
-# vi: ft=sh
