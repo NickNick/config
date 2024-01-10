@@ -1,6 +1,7 @@
-# Very nice visualization of keys, to make them worth something
-# After a couple of times logging in, you'll actually recognize
-# the keys, far better than the hexadecimal-representation.
+Include config.local
+
+# Display the host key visually.
+# You will recognize it after a few times.
 VisualHostKey yes
 
 # Share connections to reduce reconnecting to the same host
@@ -13,3 +14,4 @@ Host *
 	# On some systems, detecting that the connection is dead takes so long you
 	# might want to turn this off.
 	ControlPersist yes
+

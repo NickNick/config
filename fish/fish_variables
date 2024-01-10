@@ -5,3 +5,4 @@ SETUVAR --export INSTA_TEST_RUNNER:nextest
 SETUVAR --export PARU_PAGER:bat
 SETUVAR --export RUST_BACKTRACE:1
 SETUVAR SSH_KEYS_TO_AUTOLOAD:/home/nick/\x2essh/id_rsa
+SETUVAR fish_key_bindings:fish_default_key_bindings

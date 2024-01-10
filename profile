@@ -1,4 +1,4 @@
-config_dir="$HOME/.config/config_dir"
+config_dir="$HOME/config"
 
 [ -d "$HOME/bin"                 ] && PATH="$HOME/bin:$PATH"
 [ -d "$config_dir/bin"           ] && PATH="$config_dir/bin:$PATH"

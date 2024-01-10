@@ -1,4 +1,4 @@
-config_dir="$HOME/.config/config_dir"
+config_dir="$HOME/config"
 
 # Source a file if it exists.
 function try_source {

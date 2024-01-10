@@ -1,7 +1,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-source "$HOME/.config/config_dir/shellrc"
+source "$HOME/config/shellrc"
 
 try_source /usr/share/doc/pkgfile/command-not-found.bash
 
