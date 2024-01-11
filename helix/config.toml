@@ -1,0 +1,51 @@
+theme = "bogster"
+
+[editor]
+# line-number = "relative"
+mouse = false
+cursorline=true
+idle-timeout=10
+scrolloff=20
+auto-pairs = false
+auto-save = true
+color-modes = true
+bufferline = "always"
+
+[editor.lsp]
+display-messages = true
+display-inlay-hints = true
+
+[editor.soft-wrap]
+enable = true
+
+[keys.insert]
+right = "no_op"
+left = "no_op"
+up = "no_op"
+down = "no_op"
+
+[editor.whitespace.render]
+space = "none"
+tab = "all"
+newline = "none"
+
+[editor.whitespace.characters]
+space = "·"
+nbsp = "⍽"
+tab = "→"
+newline = "⏎"
+tabpad = "·" # Tabs will look like "→···" (depending on tab width)
+
+[editor.statusline]
+right = ["diagnostics", "workspace-diagnostics", "selections", "position", "version-control"]
+
+[keys.normal]
+C-r = ":reflow"
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "bar"
+select = "bar"
+
+[keys.normal.space]
+c = { r = ":sh cargo run" }

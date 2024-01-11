@@ -26,6 +26,7 @@ install_file() {
 			echo "'$2' already exists. It is moved to '$config_dir/$config_backup_dir/$1'." 1>&2
 		fi
 	fi
+	# FIXME: This creates a symlink in symlink for folders, not sure how to suppress this.
 	ln -fs "$config_dir/$1" "$HOME/$2"
 }
 
@@ -38,6 +39,9 @@ done
 
 mkdir -p "$HOME/.config"
 install_file "fish" ".config/fish"
+install_file "helix" ".config/helix"
+install_file "kitty" ".config/kitty"
+install_file "starship.toml" ".config/starship.toml"
 
 mkdir -p "$HOME/.ssh"
 install_file "ssh-config" ".ssh/config"
