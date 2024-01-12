@@ -6,7 +6,7 @@ mouse = false
 cursorline=true
 idle-timeout=10
 scrolloff=20
-auto-pairs = false
+auto-pairs = true
 auto-save = true
 color-modes = true
 bufferline = "always"
@@ -17,6 +17,9 @@ display-inlay-hints = true
 
 [editor.soft-wrap]
 enable = true
+
+[editor.indent-guides]
+render = true
 
 [keys.insert]
 right = "no_op"
@@ -39,13 +42,14 @@ tabpad = "·" # Tabs will look like "→···" (depending on tab width)
 [editor.statusline]
 right = ["diagnostics", "workspace-diagnostics", "selections", "position", "version-control"]
 
-[keys.normal]
-C-r = ":reflow"
-
 [editor.cursor-shape]
 insert = "bar"
 normal = "bar"
 select = "bar"
 
+[keys.normal]
+C-r = ":reflow"
+backspace = ":w"
+
 [keys.normal.space]
-c = { r = ":sh cargo run" }
+"H" = ":toggle lsp.display-inlay-hints"
