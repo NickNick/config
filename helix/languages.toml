@@ -4,7 +4,7 @@ language-id = "xml"
 scope = "source.xml"
 injection-regex = "xml"
 file-types = ["xml"]
-indent = { tab-width = 2, unit = "  " }
+indent = { tab-width = 1, unit = "" }
 # It is okay, but not good enough. Custom formatting still looks better and, more importantly, diffs (per line) better.
 # formatter = { command = "tidy" , args = ["-xml", "-i", "--wrap", "120", "-"] }
 # auto-format = true

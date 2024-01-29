@@ -7,7 +7,8 @@ cursorline=true
 idle-timeout=10
 scrolloff=20
 auto-pairs = true
-auto-save = true
+# Can be annoying when files are being watched.
+auto-save = false
 color-modes = true
 bufferline = "always"
 
