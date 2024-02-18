@@ -7,11 +7,10 @@
 	pager = delta
 	fsmonitor = true
 [diff]
-	tool = difftastic
 	submodule = log
 	algorithm = histogram
 	colorMoved = default
-	external = difft
+	context = 10
 [color]
 	ui = auto
 [push]
@@ -20,8 +19,9 @@
 	recurseSubmodules = check
 [rebase]
 	autoSquash = true
+	updateRefs = true
 [merge]
-	conflictstyle = diff3
+	conflictstyle = zdiff3
 [credential]
 	helper = cache
 [gui]
@@ -53,6 +53,8 @@
 	threads = 0
 [rerere]
 	enabled = true
+[commit]
+	verbose = true
 
 [pager]
 	difftool = true
