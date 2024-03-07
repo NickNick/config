@@ -4,5 +4,6 @@ set -gx INSTA_TEST_RUNNER nextest
 
 if status is-interactive
     starship init fish | source
+    zoxide init fish | source
     set -gx EDITOR hx
 end
