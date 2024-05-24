@@ -8,6 +8,8 @@
 	pager = delta
 	fsmonitor = true
 [diff]
+	external = difft
+	tool = difftastic
 	submodule = log
 	algorithm = histogram
 	colorMoved = default
