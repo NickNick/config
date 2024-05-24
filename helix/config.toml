@@ -6,7 +6,7 @@ mouse = false
 cursorline=true
 idle-timeout=10
 scrolloff=20
-auto-pairs = true
+auto-pairs = false
 # Can be annoying when files are being watched.
 auto-save = false
 color-modes = true
@@ -18,7 +18,7 @@ display-inlay-hints = true
 
 [editor.soft-wrap]
 enable = true
-wrap-at-text-width = true
+wrap-at-text-width = false
 wrap-indicator = ""
 
 [editor.indent-guides]
