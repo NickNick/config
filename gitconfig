@@ -1,7 +1,7 @@
 [user]
 	email=nick@astrant.net
 	name="Nick Overdijk"
-	signingkey = /Users/nick/.ssh/id_rsa.pub
+	signingkey = ~/.ssh/id_rsa.pub
 
 [core]
 	whitespace = space-before-tab

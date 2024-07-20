@@ -30,9 +30,8 @@ install_file() {
 	ln -fs "$config_dir/$1" "$HOME/$2"
 }
 
-
 # Install configuration files.
-for file in aliases bash_profile bashrc gitconfig profile shellrc ssh-config tmux.conf
+for file in aliases bash_profile bashrc gitconfig profile shellrc tmux.conf
 do
 	install_file "$file" ".$file"
 done
