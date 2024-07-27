@@ -19,7 +19,7 @@ display-inlay-hints = true
 [editor.soft-wrap]
 enable = true
 wrap-at-text-width = false
-wrap-indicator = ""
+# wrap-indicator = ""
 
 [editor.indent-guides]
 render = true
