@@ -41,6 +41,7 @@ mkdir -p "$HOME/.config"
 install_file "fish" ".config/fish"
 install_file "helix" ".config/helix"
 install_file "kitty" ".config/kitty"
+install_file "git" ".config/git"
 install_file "starship.toml" ".config/starship.toml"
 
 mkdir -p "$HOME/.ssh"

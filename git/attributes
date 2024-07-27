@@ -1,0 +1,6 @@
+*.py diff=python
+*.rs diff=rust
+*.html diff=html
+*.xml diff=html
+*.css diff=css
+*.sh diff=bash
