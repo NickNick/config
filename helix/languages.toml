@@ -3,7 +3,8 @@ command = "clippy"
 
 [[language]]
 name = "html"
-#auto-format = false
+# this auto format does not take conflict markers into account, that is a little annoying, so sometimes it is good to disable.
+auto-format = false
 language-servers = ["harper-ls", "vscode-html-language-server"]
 
 [language-server.harper-ls]
