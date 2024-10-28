@@ -104,3 +104,5 @@
 	directory = /mnt/data/code/brepo
 [gpg]
 	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = /Users/nickoverdijk/.ssh/allowed_signers

@@ -45,3 +45,4 @@ install_file "starship.toml" ".config/starship.toml"
 
 mkdir -p "$HOME/.ssh"
 install_file "ssh-config" ".ssh/config"
+install_file "ssh-allowed_signers" ".ssh/allowed_signers"
